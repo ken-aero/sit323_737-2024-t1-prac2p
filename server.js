@@ -13,11 +13,13 @@ mongoose.Promise = Promise
 
 var dbUrl = "mongodb+srv://85kbaker:user@cluster0.mwsu6sq.mongodb.net/"
 
+// schema definition for a message
 var Message = mongoose.model("Message", {
   name: String,
   message: String,
 })
 
+// get all messages
 app.get("/messages", (req, res) => {
   Message.find()
     .then((messages) => {
@@ -29,6 +31,7 @@ app.get("/messages", (req, res) => {
     })
 })
 
+// get a message for a user
 app.get("/messages/:user", (req, res) => {
   var user = req.params.user
   Message.find()
@@ -41,6 +44,7 @@ app.get("/messages/:user", (req, res) => {
     })
 })
 
+// create a new message
 app.post("/messages", async (req, res) => {
   try {
     var message = new Message(req.body)
