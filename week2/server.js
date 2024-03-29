@@ -29,8 +29,8 @@ const exponentiation = (n1, n2) => {
   return Math.pow(n1, n2)
 }
 
-const square = (n1, n2) => {
-  return Math.sqrt(n1, n2).toFixed(2)
+const square = (n1) => {
+  return Math.sqrt(n1)
 }
 
 const modulo = (n1, n2) => {
@@ -48,26 +48,25 @@ app.get("/exponentiation", (req, res) => {
     res.status(500).send("Invalid numbers provided")
   } else {
     // if valid return the result
-    res.send(`Exponentiation Result: ${exponentiation(num1, num2)}`)
+    res.send(`Exponentiation result of ${num1} ** ${num2} = ${exponentiation(num1, num2)}`)
   }
 })
 
-//localhost:3000/squareroot?num1=2&num2=3
+//localhost:3000/squareroot?num1=9
 app.get("/squareroot", (req, res) => {
   const num1 = parseFloat(req.query.num1)
-  const num2 = parseFloat(req.query.num2)
 
   // check if num1 or num2 are numbers after parseFloat
-  if (isNaN(num1) || isNaN(num2)) {
+  if (isNaN(num1)) {
     // if not numbers then return an error
-    res.status(500).send("Invalid numbers provided")
+    res.status(500).send("Invalid number provided")
   } else {
     // if valid return the result
-    res.send(`Squareroot Result: ${square(num1, num2)}`)
+    res.send(`Square root result of Math.sqrt(${num1}) = ${square(num1)}`)
   }
 })
 
-//localhost:3000/modulo?dividend=2&divisor=3
+//localhost:3000/modulo?dividend=10&divisor=3
 app.get("/modulo", (req, res) => {
   const num1 = parseFloat(req.query.dividend)
   const num2 = parseFloat(req.query.divisor)
@@ -78,7 +77,7 @@ app.get("/modulo", (req, res) => {
     res.status(500).send("Invalid numbers provided")
   } else {
     // if valid return the result
-    res.send(`Modulo Result: ${modulo(num1, num2)}`)
+    res.send(`Modulo result of ${num1} % ${num2} = ${modulo(num1, num2)}`)
   }
 })
 
