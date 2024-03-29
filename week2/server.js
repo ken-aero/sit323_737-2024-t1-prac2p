@@ -26,7 +26,7 @@ const divideNumbers = (n1, n2) => {
 ///////////////////// 4.2C /////////////////////
 
 const exponentiation = (n1, n2) => {
-  return Math.pow(n1, n2).toFixed(2)
+  return Math.pow(n1, n2)
 }
 
 const square = (n1, n2) => {
