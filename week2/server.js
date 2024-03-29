@@ -23,22 +23,83 @@ const divideNumbers = (n1, n2) => {
   return n1 / n2
 }
 
-//localhost:3000/addTwoNumbers?num1=20&num2=30
-http: app.get("/addTwoNumbers", (req, res) => {
+///////////////////// 4.2C /////////////////////
+
+const exponentiation = (n1, n2) => {
+  return Math.pow(n1, n2).toFixed(2)
+}
+
+const square = (n1, n2) => {
+  return Math.sqrt(n1, n2).toFixed(2)
+}
+
+const modulo = (n1, n2) => {
+  return n1 % n2
+}
+
+//localhost:3000/exponentiation?base=2&exponent=3
+app.get("/exponentiation", (req, res) => {
+  const num1 = parseFloat(req.query.base)
+  const num2 = parseFloat(req.query.exponent)
+
+  // check if num1 or num2 are numbers after parseFloat
+  if (isNaN(num1) || isNaN(num2)) {
+    // if not numbers then return an error
+    res.status(500).send("Invalid numbers provided")
+  } else {
+    // if valid return the result
+    res.send(`Exponentiation Result: ${exponentiation(num1, num2)}`)
+  }
+})
+
+//localhost:3000/squareroot?num1=2&num2=3
+app.get("/squareroot", (req, res) => {
   const num1 = parseFloat(req.query.num1)
   const num2 = parseFloat(req.query.num2)
 
   // check if num1 or num2 are numbers after parseFloat
   if (isNaN(num1) || isNaN(num2)) {
     // if not numbers then return an error
-    res.status(500).send("Invalid number provided")
+    res.status(500).send("Invalid numbers provided")
+  } else {
+    // if valid return the result
+    res.send(`Squareroot Result: ${square(num1, num2)}`)
+  }
+})
+
+//localhost:3000/modulo?dividend=2&divisor=3
+app.get("/modulo", (req, res) => {
+  const num1 = parseFloat(req.query.dividend)
+  const num2 = parseFloat(req.query.divisor)
+
+  // check if num1 or num2 are numbers after parseFloat
+  if (isNaN(num1) || isNaN(num2)) {
+    // if not numbers then return an error
+    res.status(500).send("Invalid numbers provided")
+  } else {
+    // if valid return the result
+    res.send(`Modulo Result: ${modulo(num1, num2)}`)
+  }
+})
+
+////////////////// END OF 4.2C //////////////////
+
+//localhost:3000/addTwoNumbers?num1=20&num2=30
+app.get("/addTwoNumbers", (req, res) => {
+  const num1 = parseFloat(req.query.num1)
+  const num2 = parseFloat(req.query.num2)
+
+  // check if num1 or num2 are numbers after parseFloat
+  if (isNaN(num1) || isNaN(num2)) {
+    // if not numbers then return an error
+    res.status(500).send("Invalid numbers provided")
   } else {
     // if valid return the total
     res.send(`Total Add: ${addNumbers(num1, num2)}`)
   }
 })
 
-// http://localhost:3000/subtractTwoNumbers?num1=20&num2=30
+//localhost:3000/subtractTwoNumbers?num1=20&num2=30
 app.get("/subtractTwoNumbers", (req, res) => {
   const num1 = parseFloat(req.query.num1)
   const num2 = parseFloat(req.query.num2)
@@ -46,14 +107,14 @@ app.get("/subtractTwoNumbers", (req, res) => {
   // check if num1 or num2 are numbers after parseFloat
   if (isNaN(num1) || isNaN(num2)) {
     // if not numbers then return an error
-    res.status(500).send("Invalid number provided")
+    res.status(500).send("Invalid numbers provided")
   } else {
     // if valid return the total
     res.send(`Total Subtract: ${subtractNumbers(num1, num2)}`)
   }
 })
 
-// http://localhost:3000/multiplyTwoNumbers?num1=20&num2=30
+//localhost:3000/multiplyTwoNumbers?num1=20&num2=30
 app.get("/multiplyTwoNumbers", (req, res) => {
   const num1 = parseFloat(req.query.num1)
   const num2 = parseFloat(req.query.num2)
@@ -61,14 +122,14 @@ app.get("/multiplyTwoNumbers", (req, res) => {
   // check if num1 or num2 are numbers after parseFloat
   if (isNaN(num1) || isNaN(num2)) {
     // if not numbers then return an error
-    res.status(500).send("Invalid number provided")
+    res.status(500).send("Invalid numbers provided")
   } else {
     // if valid return the total
     res.send(`Total Multiply: ${multiplyNumbers(num1, num2)}`)
   }
 })
 
-// http://localhost:3000/divideTwoNumbers?num1=20&num2=30
+//localhost:3000/divideTwoNumbers?num1=20&num2=30
 app.get("/divideTwoNumbers", (req, res) => {
   const num1 = parseFloat(req.query.num1)
   const num2 = parseFloat(req.query.num2)
@@ -76,7 +137,7 @@ app.get("/divideTwoNumbers", (req, res) => {
   // check if num1 or num2 are numbers after parseFloat
   if (isNaN(num1) || isNaN(num2)) {
     // if not numbers then return an error
-    res.status(500).send("Invalid number provided")
+    res.status(500).send("Invalid numbers provided")
   } else {
     // if valid return the total
     res.send(`Total Divide: ${divideNumbers(num1, num2)}`)
